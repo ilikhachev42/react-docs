@@ -258,42 +258,23 @@
       <p>
         For example, the HTML:
       </p>
-      <code>
-        <button onclick="activateLasers()">
-  Activate Lasers
-        </button>
-      </code>
+			<div class="highlight">
+				<pre>
+					<code>
+						<span><</span><span>button</span>&nbsp<span>onclick</span><span>=</span><span>"</span><span>activateLasers</span><span>(</span><span>)</span><span>"</span><span>></span><br/>&nbsp&nbsp<span>Activate Lasers</span><br/><span><</span><span>/</span><span>button</span><span>></span>
+					</code>
+				</pre>
+			</div>
       <p>
         is slightly different in React:
       </p>
-      <code>
-        <button onClick={activateLasers}>  Activate Lasers
-        </button>
-      </code>
-      <p>
-        Another difference is that you cannot return false to prevent default behavior in React. You must call preventDefault explicitly. For example, with plain HTML, to prevent the default form behavior of submitting, you can write:
-      </p>
-      <code>
-        <form onsubmit="console.log('You clicked submit.'); return false">
-  <button type="submit">Submit</button>
-</form>
-      </code>
-      <p>
-        In React, this could instead be:
-      </p>
-      <code>
-        function Form() {
-  function handleSubmit(e) {
-    e.preventDefault();    console.log('You clicked submit.');
-  }
-
-  return (
-    <form onSubmit={handleSubmit}>
-      <button type="submit">Submit</button>
-    </form>
-  );
-}
-      </code>
+			<div class="highlight">
+				<pre>
+					<code>
+						<span><</span><span>button</span>&nbsp<span>onclick</span><span>=</span><span>{</span><span>activateLasers</span><span>}</span><span>></span><br/>&nbsp&nbsp<span>Activate Lasers</span><br/><span><</span><span>/</span><span>button</span><span>></span>
+					</code>
+				</pre>
+			</div>
       <p>
         Read more information on 
         <a href="https://legacy.reactjs.org/docs/handling-events.html">
@@ -314,27 +295,24 @@
     <p>
       Consider these two components:
     </p>
-    <code>
-      function UserGreeting(props) {
-  return <h1>Welcome back!</h1>;
-}
-
-function GuestGreeting(props) {
-  return <h1>Please sign up.</h1>;
-}
-    </code>
+		<div class="highlight">
+			<pre>
+				<code>
+					<span>function</span>&nbsp<span>UserGreeting</span><span>(</span><span>props</span><span>)</span>&nbsp<span>{</span><br/>&nbsp&nbsp<span>return</span>&nbsp<span><</span><span>h1</span><span>></span><span>Welcome back!<span><</span><span>/</span><span>h1</span><span>></span><span>;</span><br/><span>}</span><br/><br/><span>function</span>&nbsp<span>GuestGreeting</span><span>(</span><span>props</span><span>)</span>&nbsp<span>{</span><br/>&nbsp&nbsp<span>return</span>&nbsp<span><</span><span>h1</span><span>></span><span>Please sign up.</span><span><</span><span>/</span><span>h1</span><span>></span><span>;</span><br/><span>}</span>
+				</code>
+			</pre>
+		</div>
     <p>
       We’ll create a Greeting component that displays either of these components depending on whether a user is logged in:
     </p>
-    <code>
-      function Greeting(props) {
-  const isLoggedIn = props.isLoggedIn;
-  if (isLoggedIn) {    return <UserGreeting />;  }  return <GuestGreeting />;}
-const root = ReactDOM.createRoot(document.getElementById('root')); 
-// Try changing to isLoggedIn={true}:
-root.render(<Greeting isLoggedIn={false} />);
-    </code>
-    <p>This example renders a different greeting depending on the value of isLoggedIn prop.</p>
+		<div class="highlight">
+			<pre>
+				<code>
+					<span>function</span>&nbsp<span>Greeting</span><span>(</span><span>props</span><span>)</span>&nbsp<span>{</span><br/>&nbsp&nbsp<span>const</span>&nbsp<span>isLoggedIn</span>&nbsp<span>=</span>&nbsp<span>props</span><span>.</span><span>isLoggedIn</span><span>;</span><br/>&nbsp&nbsp<span>if</span>&nbsp<span>(</span><span>isLoggedIn</span><span>)</span>&nbsp<span>{</span><br/>&nbsp&nbsp&nbsp&nbsp<span>return</span>&nbsp<span><</span><span>UserGreeting</span>&nbsp<span>/</span><span>></span><span>;</span><br/>&nbsp&nbsp<span>}</span><br/>&nbsp&nbsp<span>return</span>&nbsp<span><</span><span>GuestGreeting</span>&nbsp<span>/</span><span>></span><span>;</span><br/><span>}</span><br/><br/><span>const</span>&nbsp<span>root</span>&nbsp<span>=</span>&nbsp<span>ReactDOM</span><span>.</span><span>createRoot</span><span>(</span><span>document</span><span>.</span><span>getElementById</span><span>(</span><span>'root'</span><span>)</span><span>)</span><span>;</span><br/><span>root</span><span>.</span><span>render</span><span>(</span><span><</span><span>Greeting</span>&nbsp<span>isLoggedIn</span><span>=</span><span>{</span><span>false</span><span>}</span>&nbsp<span>/</span><span>></span><span>)</span><span>;</span>
+				</code>
+			</pre>
+		</div>
+      <p>This example renders a different greeting depending on the value of <span>isLoggedIn</span> prop.</p>
       <p>
         Read more information on 
         <a href="https://legacy.reactjs.org/docs/conditional-rendering.html">
@@ -346,6 +324,54 @@ root.render(<Greeting isLoggedIn={false} />);
       <header>
         <h1>Lists and Keys</h1>
       </header>
+			<p>
+				First, let's review how you transform lists in JavaScript.
+			</p>
+			<p>
+				Given the code below, we use the <span>map()</span> function to take an array of <span>numbers</span> and double their values. We assign the new array returned by <span>map()</span> to the variable <span>doubled</span> and log it:
+			</p>
+			<div class="highlight">
+				<pre>
+					<code>
+						<span>const</span>&nbsp<span>numbers</span>&nbsp<span>=</span>&nbsp<span>[</span><span>1</span><span>,</span>&nbsp<span>2</span><span>,</span>&nbsp<span>3</span><span>,</span>&nbsp<span>4</span><span>,</span>&nbsp<span>5</span><span>]</span><span>;</span><br/><span>const</span>&nbsp<span>doubled</span>&nbsp<span>=</span>&nbsp<span>numbers</span><span>.</span><span>map</span><span>(</span><span>(</span><span>number</span><span>)</span>&nbsp<span>=</span><span>></span>&nbsp<span>number</span>&nbsp<span>*</span>&nbsp<span>2</span><span>)</span><span>;</span><br/><span>console</span><span>.</span><span>log</span><span>(</span><span>doubled</span><span>)</span><span>;</span>
+					</code>
+				</pre>
+			</div>
+			<p>
+				This code logs <span>[2, 4, 6, 8, 10]</span> to the console.
+			</p>
+			<p>
+				In React, transforming arrays into lists of elements is nearly identical.
+			</p>
+			<h2>
+				Rendering Multiple Components
+			</h2>
+			<p>
+				You can build collections of elements and include them in JSX using curly braces <span>{}</span>.
+			</p>
+			<p>
+				Below, we loop through the <span>numbers</span> array using the JavaScript <span>map()</span> function. We return a <span><</span><span>li</span><span>></span> element for each item. Finally, we assign the resulting array of elements to <span>listItems</span>:
+			</p>
+			<div class="highlight">
+				<pre>
+					<code>
+						<span>const</span>&nbsp<span>numbers</span>&nbsp<span>=</span>&nbsp<span>[</span><span>1</span><span>,</span>&nbsp<span>2</span><span>,</span>&nbsp<span>3</span><span>,</span>&nbsp<span>4</span><span>,</span>&nbsp<span>5</span><span>]</span<span>;</span><br/><span>const</span>&nbsp<span>listItems</span>&nbsp<span>=</span>&nbsp<span>numbers</span><span>.</span><span>map</span><span>(</span><span>(</span><span>number</span><span>)</span>&nbsp<span>=</span><span>></span><br/>&nbsp&nbsp<span><</span><span>li</span><span>></span><span>{</span><span>number</span><span>}</span><span><</span><span>/</span><span>li</span><span>></span><br/><span>)</span><span>;</span>
+					</code>
+				</pre>
+			</div>
+			<p>
+				Then, we can include the entire <span>listItems</span> array inside a <span><</span><span>ul</span><span>></span> element:
+			</p>
+			<div class="highlight">
+				<pre>
+					<code>
+						<span><</span><span>ul</span><span>></span><span>{</span><span>listItems<span>}</span><span><</span><span>/</span><span>ul</span><span>></span>
+					</code>
+				</pre>
+			</div>
+			<p>
+				This code displays a bullet list of numbers between 1 and 5.
+			</p>
       <p>
         Read more information on 
         <a href="https://legacy.reactjs.org/docs/lists-and-keys.html">
@@ -357,6 +383,19 @@ root.render(<Greeting isLoggedIn={false} />);
       <header>
         <h1>Forms</h1>
       </header>
+			<p>
+				HTML form elements work a bit differently from other DOM elements in React, because from elements naturally keep some internal state. For example, this form in plain HTML accepts a single name:
+			</p>
+			<div class="highlight">
+				<pre>
+					<code>
+						<span><</span><span>form</span><span>></span><br/>&nbsp&nbsp<span><</span><span>label</span><span>></span><br/>&nbsp&nbsp&nbsp&nbsp<span>Name:</span><br/>&nbsp&nbsp&nbsp&nbsp<span><</span><span>input</span>&nbsp<span>type</span><span>=</span><span>"</span><span>text</span><span>"</span>&nbsp<span>name</span><span>=</span><span>"</span><span>name</span><span>"</span>&nbsp<span>/</span><span>></span><br/>&nbsp&nbsp<span><</span><span>/</span><span>label</span><span>></span><br/>&nbsp&nbsp<span><</span><span>input</span>&nbsp<span>type</span><span>=</span><span>"</span><span>submit</span><span>"</span>&nbsp<span>value</span><span>=</span><span>"</span><span>Submit</span><span>"</span>&nbsp<span>/</span><span>></span><br/><span><</span><span>/</span><span>form</span><span>></span>
+					</code>
+				</pre>
+			</div>
+			<p>
+				This form has the default HTML form behavior of browsing to a new page when the user submits the form. If you want this behavior in React, it just works. But in most cases, it’s convenient to have a JavaScript function that handles the submission of the form and has access to the data that the user entered into the form. The standard way to achieve this is with a technique called “controlled components”.
+			</p>
       <p>
         Read more information on 
         <a href="https://legacy.reactjs.org/docs/forms.html">
@@ -368,6 +407,22 @@ root.render(<Greeting isLoggedIn={false} />);
       <header>
         <h1>Lifting State Up</h1>
       </header>
+			<p>
+				Often, several components need to reflect the same changing data. We recommend lifting the shared state up to their closest common ancestor. Let’s see how this works in action.
+			</p>
+			<p>
+				In this section, we will create a temperature calculator that calculates whether the water would boil at a given temperature.
+			</p>
+			<p>
+				We will start with a component called BoilingVerdict. It accepts the celsius temperature as a prop, and prints whether it is enough to boil the water:
+			</p>
+			<div class="highlight">
+				<pre>
+					<code>
+						<span>function</span>&nbsp<span>BoilingVerdict</span><span>(</span><span>props</span><span>)</span>&nbsp<span>{</span><br/>&nbsp&nbsp<span>if</span>&nbsp<span>(</span><span>props</span><span>.</span><span>celsius</span>&nbsp<span>>=</span>&nbsp<span>100</span><span>)</span>&nbsp<span>{</span><br/>&nbsp&nbsp&nbsp&nbsp<span>return</span>&nbsp<span><</span><span>p</span><span>></span><span>The water would boil.</span><span><</span><span>/</span><span>p</span><span>></span><span>;</span><br/>&nbsp&nbsp<span>}</span><br/>&nbsp&nbsp<span>return</span>&nbsp<span><</span><span>p</span><span>></span><span>The water would not boil.</span><span><</span><span>/</span><span>p</span><span>></span><span>;</span><br/><span>}</span>
+					</code>
+				</pre>
+			</div>
       <p>
         Read more information on 
         <a href="https://legacy.reactjs.org/docs/lifting-state-up.html">
@@ -379,6 +434,41 @@ root.render(<Greeting isLoggedIn={false} />);
       <header>
         <h1>Composition vs Inheritance</h1>
       </header>
+			<p>
+				React has a powerful composition model, and we recommend using composition instead of inheritance to reuse code between components.
+			</p>
+			<p>
+				In this section, we will consider a few problems where developers new to React often reach for inheritance, and show how we can solve them with composition.
+			</p>
+			<h2>
+				Containment
+			</h2>
+			<p>
+				Some components don’t know their children ahead of time. This is especially common for components like <span>Sidebar</span> or <span>Dialog</span> that represent generic “boxes”.
+			</p>
+			<p>
+				We recommend that such components use the special <span>children</span> prop to pass children elements directly into their output:
+			</p>
+			<div class="highlight">
+				<pre>
+					<code>
+						<span>function</span>&nbsp<span>FancyBorder</span><span>(</span><span>props</span><span>)</span>&nbsp<span>{</span><br/>&nbsp&nbsp<span>return</span>&nbsp<span>(</span><br/>&nbsp&nbsp&nbsp&nbsp<span><</span><span>div</span>&nbsp<span>className</span><span>=</span><span>{</span><span>'FancyBorder FancyBorder-'</span>&nbsp<span>+</span>&nbsp<span>props</span><span>.</span><span>color</span><span>}</span><span>></span><br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<span>{</span><span>props</span><span>.</span><span>children</span><span>}</span><br/>&nbsp&nbsp&nbsp&nbsp<span><</span><span>/</span><span>div</span><span>></span><br/>&nbsp&nbsp<span>)</span><span>;</span><br/><span>}</span>
+					</code>
+				</pre>
+			</div>
+			<p>
+				This lets other components pass arbitrary children to them by nesting the JSX:
+			</p>
+			<div class="highlight">
+				<pre>
+					<code>
+						<span>function</span>&nbsp<span>WelcomeDialog</span><span>(</span><span>)</span>&nbsp<span>{</span><br/>&nbsp&nbsp<span>return</span>&nbsp<span>(</span><br/>&nbsp&nbsp&nbsp&nbsp<span><</span><span>FancyBorder</span>&nbsp<span>color</span><span>=</span><span>"</span><span>blue</span><span>"</span><span>></span><br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<span><</span><span>h1</span>&nbsp<span>className</span><span>=</span><span>"</span><span>Dialog-title</span><span>"</span><span>></span><br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<span>Welcome</span><br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<span><</span><span>/</span><span>h1</span><span>></span><br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<span><</span><span>p</span>&nbsp<span>className</span><span>=</span><span>"</span><span>Dialog-message</span><span>"</span><span>></span><br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<span>Thank you for visiting our spacecraft!</span><br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<span><</span><span>/</span><span>p</span><span>></span><br/>&nbsp&nbsp&nbsp&nbsp<span><</span><span>/</span><span>FancyBorder</span><span>></span><br/>&nbsp&nbsp<span>)</span><span>;</span><br/><span>}</span>
+					</code>
+				</pre>
+			</div>
+			<p>
+				Anything inside the <span><</span><span>FancyBorder</span><span>></span> JSX tag gets passed into the <span>FancyBorder</span> component as a <span>children</span> prop. Since <span>FancyBorder</span> renders <span>{props.children}</span> inside a <span><</span><span>div</span><span>></span>, the passed elements appear in the final output.
+			</p>
       <p>
         Read more information on 
         <a href="https://legacy.reactjs.org/docs/composition-vs-inheritance.html">
@@ -390,6 +480,34 @@ root.render(<Greeting isLoggedIn={false} />);
       <header>
         <h1>Thinking In React</h1>
       </header>
+			<p>
+				React is, in our opinion, the premier way to build big, fast Web apps with JavaScript. It has scaled very well for us at Facebook and Instagram.
+			</p>
+			<p>
+				One of the many great parts of React is how it makes you think about apps as you build them. In this document, we’ll walk you through the thought process of building a searchable product data table using React.
+			</p>
+			<h2>Start With A Mock</h2>
+			<p>
+				Imagine that we already have a JSON API and a mock from our designer. The mock looks like this:
+			</p>
+			<img src="img/thinking-in-react-mock.png"/>
+			<p>
+				Our JSON API returns some data that looks like this:
+			</p>
+			<div class="highlight">
+				<pre>
+					<code>
+						[<br/>
+ 							 &nbsp{category: "Sporting Goods", price: "$49.99", stocked: true, name: "Football"},<br/>
+						   &nbsp{category: "Sporting Goods", price: "$9.99", stocked: true, name: "Baseball"},<br/>
+						   &nbsp{category: "Sporting Goods", price: "$29.99", stocked: false, name: "Basketball"},<br/>
+						   &nbsp{category: "Electronics", price: "$99.99", stocked: true, name: "iPod Touch"},<br/>
+						   &nbsp{category: "Electronics", price: "$399.99", stocked: false, name: "iPhone 5"},<br/>
+						   &nbsp{category: "Electronics", price: "$199.99", stocked: true, name: "Nexus 7"}<br/>
+						];
+					</code>
+				</pre>
+			</div>
       <p>
         Read more information on 
         <a href="https://legacy.reactjs.org/docs/thinking-in-react.html">
