@@ -68,7 +68,7 @@
       <div class="highlight">
         <pre>
           <code class="code">
-            <span class="item keyword">const </span>
+            <span>const </span>
             root
             <span>=</span>
             ReactDOM<span>.</span><span>createRoot</span><span>(</span>document<span>.</span><span>getElementById</span><span>(</span><span>'root'</span><span>)</span><span>)</span><span>;</span><br>root<span>.</span><span>render</span><span>(</span><span><span><span><</span>h1</span><span>></span></span><span>Hello, World!</span><span><span><span><</span><span>/</span>h1</span><span>></span></span><span>)</span><span>;</span>
@@ -135,24 +135,26 @@
       <p>
         The simplest way to define a component is to write a JavaScript function:
       </p>
-      <code>
-        function Welcome(props) {
-  return <h1>Hello, {props.name}</h1>;
-}
-      </code>
+			<div class="highlight">
+				<pre>
+					<code>
+						<span>function</span>&nbsp<span>Welcome</span><span>(</span><span>props</span><span>)</span>&nbsp<span>{</span><br/>&nbsp&nbsp<span><</span><span>h1><span>Hello, </span><span>{</span><span>props</span><span>.</span><span>name</span><span>}</span><span><</span><span>/h1</span><span>></span><span>;</span><br /><span>}</span>
+      		</code>
+				</pre>
+			</div>
       <p>
         This function is a valid React component because it accepts a single “props” (which stands for properties) object argument with data and returns a React element. We call such components “function components” because they are literally JavaScript functions.
       </p>
       <p>
         You can also use an ES6 class to define a component:
       </p>
-      <code>
-        class Welcome extends React.Component {
-  render() {
-    return <h1>Hello, {this.props.name}</h1>;
-  }
-}
-      </code>
+			<div class="highlight">
+				<pre>
+					<code>
+						<span>class</span>&nbsp<span>Welcome</span>&nbsp<span>extends</span>&nbsp<span>React</span><span>.</span><span>Component</span>&nbsp<span>{</span><br/>&nbsp&nbsp<span>render</span><span>(</span><span>)</span>&nbsp<span>{</span><br/>&nbsp&nbsp&nbsp&nbsp<span>return</span>&nbsp<span><</span><span>h1></span><span>Hello, </span><span>{</span><span>this</span><span>.</span><span>props</span><span>.</span><span>name</span><span>}</span><span><</span><span>/h1></span><span>;</span><br/>&nbsp&nbsp<span>}</span><br/><span>}</span>
+					</code>
+				</pre>
+			</div>
       <p>
         The above two components are equivalent from React’s point of view.
       </p>
@@ -168,47 +170,38 @@
         <h1>State and Lifecycle</h1>
       </header>
       <p>
-        Consider the ticking clock example from one of the previous sections. In Rendering Elements, we have only learned one way to update the UI. We call root.render() to change the rendered output:
+        Consider the ticking clock example from one of the previous sections. In Rendering Elements, we have only learned one way to update the UI. We call <span class="root-render">root.render()</span> to change the rendered output:
       </p>
-      <code>
-        const root = ReactDOM.createRoot(document.getElementById('root'));
-  
-function tick() {
-  const element = (
-    <div>
-      <h1>Hello, world!</h1>
-      <h2>It is {new Date().toLocaleTimeString()}.</h2>
-    </div>
-  );
-  root.render(element);}
-
-setInterval(tick, 1000);
-      </code>
+			<div class="highlight">
+				<pre>
+					<code>
+        		<span>const</span>&nbsp<span>root</span>&nbsp<span>=</span>&nbsp<span>ReactDOM</span><span>.</span><span>createRoot</span><span>(</span><span>document</span><span>.</span><span>getElementById<span>(</span><span>'root'</span><span>)</span><span>)</span><span>;</span><br/><br/><span>function</span>&nbsp<span>tick</span><span>(</span><span>)</span>&nbsp<span>{</span><br/>&nbsp&nbsp<span>const</span>&nbsp<span>element</span>&nbsp<span>=</span>&nbsp<span>(</span><br/>&nbsp&nbsp&nbsp&nbsp<span><</span><span>div</span><span>></span><br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<span><</span><span>h1</span><span>></span><span>Hello, world!</span><span><</span><span>/</span><span>h1</span><span>></span><br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<span><</span><span>h2</span><span>></span><span>It is </span><span>{</span><span>new</span>&nbsp<span>Date</span><span>(</span><span>)</span><span>.</span><span>toLocateTimeString</span><span>(</span><span>)</span><span>}</span><span>.</span><span><</span><span>/</span><span>h2</span><span>></span><br/>&nbsp&nbsp&nbsp&nbsp<span><</span><span>/</span><span>div</span><span>></span><br/>&nbsp&nbsp<span>)</span><span>;</span><br/>&nbsp&nbsp<span>root</span><span>.</span><span>render</span><span>(</span><span>element</span><span>)</span><span>;</span><br/><span>}</span><br/><br/><span>setInterval</span><span>(</span><span>tick</span><span>,</span>&nbsp<span>1000</span><span>)</span><span>;</span>
+		      </code>
+				</pre>
+			</div>
       <p>
         We can start by encapsulating how the clock looks:
       </p>
-      <code>
-        const root = ReactDOM.createRoot(document.getElementById('root'));
-
-function Clock(props) {
-  return (
-    <div>      <h1>Hello, world!</h1>      <h2>It is {props.date.toLocaleTimeString()}.</h2>    </div>  );
-}
-
-function tick() {
-  root.render(<Clock date={new Date()} />);}
-
-setInterval(tick, 1000);
-      </code>
+			<div class="highlight">
+				<pre>
+					<code>
+						<span>const</span>&nbsp<span>root</span>&nbsp<span>=</span><br/><span>ReactDOM</span><span>.</span><span>createRoot</span><span>(</span><span>document</span><span>.</span><span>getElementById</span><span>(</span><span>'root'</span><span>)</span><span>)</span><span>;</span><br/><br/><span>function</span>&nbsp<span>Clock</span><span>(</span><span>props</span><span>)</span>&nbsp<span>{</span><br/>&nbsp&nbsp<span>return</span>&nbsp<span>(</span><br/>&nbsp&nbsp&nbsp&nbsp<span><</span><span>div</span><span>></span><br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<span><</span><span>h1</span><span>></span><span>Hello, world!</span><span><</span><span>/</span><span>h1</span><span>></span><br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<span><</span><span>h2</span><span>></span><span>It is <span>{</span><span>props</span><span>.</span><span>date</span><span>.</span><span>toLocateTimeString</span><span>(</span><span>)</span><span>}</span><span>.</span><span><</span><span>/</span><span>h2</span><span>></span><br/>&nbsp&nbsp&nbsp&nbsp<span><</span><span>/</span><span>div</span><span>></span><br/>&nbsp&nbsp<span>)</span><span>;</span><br/><span>}</span><br/><br/><span>function</span>&nbsp<span>tick</span><span>(</span><span>)</span>&nbsp<span>{</span><br/>&nbsp&nbsp<span>root</span><span>.</span><span>render</span><span>(</span><span><</span><span>Clock</span>&nbsp<span>date</span><span>=</span><span>{</span><span>new</span>&nbsp<span>Date</span><span>(</span><span>)</span><span>}</span>&nbsp<span>/</span><span>></span><span>)</span><span>;</span><br/><span>}</span><br/><br/><span>setInterval</span><span>(</span><span>tick</span><span>,</span>&nbsp<span>1000</span><span>)</span><span>;</span>
+					</code>
+				</pre>
+			</div>
       <p>
-        However, it misses a crucial requirement: the fact that the Clock sets up a timer and updates the UI every second should be an implementation detail of the Clock.
+        However, it misses a crucial requirement: the fact that the <span>Clock</span> sets up a timer and updates the UI every second should be an implementation detail of the <span>Clock</span>.
       </p>
       <p>
-        Ideally we want to write this once and have the Clock update itself:
+        Ideally we want to write this once and have the <span>Clock</span> update itself:
       </p>
-      <code>
-        root.render(<Clock />);
-      </code>
+			<div class="highlight">
+				<pre>
+					<code>
+						<span>root</span><span>.</span><span>render</span><span>(</span><span><</span><span>Clock</span>&nbsp<span>/</span><span>></span><span>)</span><span>;</span>
+					</code>
+				</pre>
+			</div>
       <p>
         To implement this, we need to add “state” to the Clock component.
       </p>
